@@ -1,0 +1,5 @@
+{
+	"python.linting.pylintEnabled": true,
+	"python.linting.mypyEnabled": true,
+	"python.linting.pylintPath": ".env/bin/pylint"
+}

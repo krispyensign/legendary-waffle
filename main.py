@@ -14,17 +14,14 @@ if __name__ == '__main__':
     f[1] = (x - m[1])/2
 
 #     current: Expr = m[1].replace(
-#             (-1)**((-1)**x/4 + x/2 - 1/4), 
+#             (-1)**((-1)**x/4 + x/2 - 1/4),
 #             (-1)**((-1)**x/4 + x/2)/(a[2]+b[2]))
     current = m[1]
-    print(current)
-    pretty_print(current)
-    print('='*80)
 
     z = 1/4**Rational(1/2)+I/4**Rational(1/2)
     current = current.replace(
         (-1)**((-1)**x/4 + x/2 - 1/4),
-        z**(-1)**x *(I**x) *z
+        z**(-1)**x * (I**x) * z
     ).replace(
         (1/2 + I/2)**((-1)**x),
         (Rational(1/2) + I*(-1)**x/2)
@@ -33,13 +30,40 @@ if __name__ == '__main__':
     ).replace(
         (-1)**x,
         I**(2*x)
-    ).subs(
-        I**(2*x)*I**(x+1),
-        I**(-x+1)
-    ).subs(
-        I**(3*x),
-        I**(-x)
-    )
+    ).subs({
+        I**(2*x)*I**(x+1): I**(-x+1),
+        I**(3*x): I**(-x),
+    })
 
-    print(current)
-    pretty_print(current)
+    current = (current * 4*I).expand()
+
+    z = (((-1)**(x+1)-1)/2 + I*((-1)**(x)-1)/2)
+    g = (((((
+                            ((((((-1)**((x**2 + x)/2)).subs(x, x+1) + 1) / 2).expand()*2-1)*(-1))
+                            .subs((-1)**(x**2/2), z)
+                            .expand()
+                            .subs({
+                                (-1)**(5*x/2): I**x,
+                                (-1)**(3*x/2): I**(3*x),
+                                I*I**x: I**(x+1),
+                            })
+                            .subs({
+                                I**(2*x)*I**(x+1): I**(3*x+1)
+                            })*2)
+                        .factor()/(-1 - I))
+                .expand()
+                .subs({
+                    I*I**x: I**(x+1),
+                    I**(3*x): I**(-x)
+                })*(-1))
+            .expand()
+            .subs({
+                I*I**x: I**(x+1),
+            })
+            .factor()/I)
+        .expand()
+        .subs({
+            I*I**(-x): I**(1-x),
+        }))
+    pretty_print(g)
+    # pretty_print([g.subs(x, n).expand() for n in range(4)])

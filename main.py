@@ -66,4 +66,3 @@ if __name__ == '__main__':
             I*I**(-x): I**(1-x),
         }))
     pretty_print(g)
-    # pretty_print([g.subs(x, n).expand() for n in range(4)])

@@ -9,8 +9,13 @@ sympy = "*"
 [dev-packages]
 pipenv = "*"
 mypy = "*"
-pylint = "*"
-pyls = "*"
+python-lsp-server = "*"
+rope = "*"
+pyflakes = "*"
+mccabe = "*"
+pycodestyle = "*"
+yapf = "*"
+jupyterlab = "*"
 
 [requires]
 python_version = "3.10"

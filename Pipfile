@@ -16,6 +16,7 @@ mccabe = "*"
 pycodestyle = "*"
 yapf = "*"
 jupyterlab = "*"
+pyls = "*"
 
 [requires]
 python_version = "3.10"
